@@ -1,0 +1,140 @@
+<?php
+ include_once("headeroffices.php");
+?>
+ <link href="../css/form.css" rel="stylesheet" type="text/css" />
+               <div class="panel panel-default">
+                  <div class="panel-heading">
+						<p align="left"><font size=6 face="Imprint MT Shadow FB" color="#74767d">Admin Message</font></p>
+						<p align="left"><font size=4 face="Imprint MT Shadow FB" color="#90999c">Message / Admin Message</font></p>
+                  </div>
+
+
+
+  
+				  
+				  <div class="col-md-12">
+<div class="panel-body">
+<div style="margin-: 0px;" class="row">
+<div class="container">
+
+<div class="panel">
+             <div class="panel panel-default">
+              <div class="panel-heading">
+
+                     <form action="#" class="navbar-search form-inline" style="margin:0px" method="POST">
+								<?php
+									include "../db_config/dbconfig.php";
+							                $noclearmsg=mysqli_query($con,"select * from request where Offices='registrar' and Status='0'");
+                                           $numofmsg1 = mysqli_num_rows($noclearmsg);
+                                        
+                                    ?>
+						                
+
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+								<p align="left"><font size=5 color="Green" face="Imprint MT Shadow FB"><div class="size">
+<font color="orange">
+<?php
+$Today=date('y:m:d');
+$new=date('l, F d, Y',strtotime($Today));
+echo $new; ?>
+</font> 
+</div>You have 
+                                <i class='glyphicon glyphicon-envelope'></i> <font color="red"><sup><?php echo $numofmsg1;?></sup></font> From Student</font></p><?php $sql=mysqli_query($con,"update request set Status='1'"); ?></a>										
+                   	</form>  
+              </div>
+			  
+			  
+
+<div id="collapseTwo" class="panel-collapse collapse">
+<fieldset>
+<legend>Message Inbox From Student </legend>
+  <form name="form2" method="post" action="">
+  							    							  <table class="table" align="center" border="1" width="100%" id="example">
+                                    <tr class="danger">
+                                   <th>SNO</th>
+                                   <th>Certificate_No</th>
+								   <th>Stud_ID</th>
+                                   <th>Email</th>
+								   <th>Message</th>
+								   <th>Time</th>
+								   <th>Check</th>
+								   <th>Action</th>
+								
+								   
+                                   </tr>
+                                       <?php
+									   $i =1;
+                                include "../db_config/dbconfig.php";
+                                $res=mysqli_query($con,"SELECT* FROM Request,Student,Certificate where Request.Idno=Student.Idno and offices='registrar'");
+                                while($row=mysqli_fetch_array($res))
+                                  {
+	                              ?>
+	                            <tr>
+							   <td class="danger"><p><?php echo $i; ?></p></td>
+                               <td><p><?php echo $row['Certificate_No']; ?></p></td>
+							   <td><p><?php echo $row['Idno']; ?></p></td>
+							   <td><p><?php echo $row['Email']; ?></p></td>
+							   <td><p><?php echo $row['messages']; ?></p></td>
+							   <td><p><?php echo $row['timestamp']; ?></p></td>
+							   <td>&nbsp;<a href='checkcertificate.php?slid1=<?php echo $row["Certificate_No"]; ?>&reply=to' class="btn btn-success"><span class="glyphicon glyphicon-ok"></span>&nbsp;&nbsp;Check</a></td>
+							    <td><a href='deleterequest.php?sid=<?php echo $row['RID']; ?>'><img src='../images/delete.png'  onclick="return confirm('Are you sure??')"/></a></td>
+							   
+				
+
+                                </tr>
+                                  <?php
+								  $i++;
+                                 }
+                                  ?>
+                               </table>
+							  
+</form>	
+</fieldset>				
+</div>
+
+
+
+
+
+
+
+
+</div>
+</div>
+</div>     
+</div>	
+</div>
+</div>
+				  
+				  
+				
+				  
+
+
+
+
+				  
+				  
+				  
+				  
+				  
+				  
+				  
+				  
+				  
+				  
+				  
+				  
+            </div>
+            <!--/span-->
+        </div>
+        <!--/row-->
+
+    </div>
+</div>
+
+<hr/></font>
+ 
+<?php
+ include_once("footer.php");
+?>
